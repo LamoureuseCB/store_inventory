@@ -9,10 +9,10 @@ public class Order {
     private ArrayList<Product> products;
     private double totalCost;
 
-    public Order(User user, ArrayList<Product> products, double totalCost) {
+    public Order(User user) {
         this.user = user;
-        this.products = products;
-        this.totalCost = totalCost;
+        this.products = new ArrayList<>();
+        this.totalCost = 0;
     }
 
     public User getUser() {
@@ -31,9 +31,10 @@ public class Order {
         products.add(product);
 
 
+
     }
 
-    public double countTotalCost() {
+    public double calculateTotalCost() {
         double totalSum = 0;
         for (Product product : products) {
             totalSum += product.getPricePerUnit() * product.getQuantity();
