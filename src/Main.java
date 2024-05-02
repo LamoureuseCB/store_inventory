@@ -13,76 +13,88 @@ public class Main {
             printMenu();
             int taskNumber = input.nextInt();
             switch (taskNumber) {
-                case 1 -> System.out.println("Введите товар:");
-                System.out.print("Название товара: ");
-                String name = input.nextLine();
-                System.out.print("Категория: ");
-                String category = input.nextLine();
-                System.out.print("Количество: ");
-                int quantity = input.nextInt();
-                System.out.print("Цена за шт: ");
-                double pricePerUnit = input.nextDouble();
-                Product product = new Product(name, category, quantity, pricePerUnit);
-                store.addProductToStore(product);
-                System.out.println("Товары добавлены в магазин");
-                break;
+                case 1:
+                    System.out.println("Товар:");
+                    System.out.println("Название товара: ");
+                    String name = input.nextLine();
+                    System.out.println("\nКатегория: ");
+                    String category = input.nextLine();
 
-                case 2 -> System.out.print("Введите название товара для удаления: ");
-                String productName = input.nextLine();
+                    System.out.print("Количество: ");
+                    int quantity = input.nextInt();
 
-//                    Product removedProduct = store.removeProductFromStore(productName);
+                    System.out.print("Цена за шт: ");
+                    double pricePerUnit = input.nextDouble();
+
+                    Product product = new Product(name, category, quantity, pricePerUnit);
+                    store.addProductToStore(product);
+                    System.out.println("Товары добавлены в магазин");
+                    break;
+
+                case 2:
+                    System.out.print("Введите название товара для удаления: ");
+                    String productName = input.next();
+                    Product removedProduct = store.removeProduct(productName);
                     if (removedProduct != null) {
                         System.out.println("Товар удален из магазина");
                     } else {
                         System.out.println("Товар не найден в магазине");
                     }
-                }
-                break;
 
-                case 3 -> System.out.print("Введите название товара для обновления количества: ");
-                String productNameToUpdate = input.nextLine();
-                System.out.print("Введите новое количество товара:");
-                int updatedQuantity = input.nextInt();
-                store.updateAmountOfProducts(product, updatedQuantity);
-                System.out.println("Количество товара изменено");
-                break;
+                    break;
 
-                case 4 -> System.out.print("Введите название категории товаров ");
-                String categoryToDisplay = input.nextLine();
-                store.showProductByCategory(categoryToDisplay);
-                break;
+                case 3:
+                    System.out.print("Введите название товара для обновления количества: ");
+                    String productNameToUpdate = input.nextLine();
+                    System.out.print("Введите новое количество товара:");
+                    int updatedQuantity = input.nextInt();
+                    store.updateAmountOfProducts(productNameToUpdate, updatedQuantity);
+                    System.out.println("Количество товара изменено");
+                    break;
 
-                case 5 ->
-                double totalCost = store.countTotalCost();
-                System.out.println("Общая стоимость всех товаров на складе: " + totalCost);
-                break;
+                case 4:
+                    System.out.print("Введите название категории товаров ");
+                    String categoryToDisplay = input.nextLine();
+                    store.showProductByCategory(categoryToDisplay);
+                    break;
 
-                case 6 -> System.out.print("Введите имя пользователя: ");
+                case 5:
+                    double totalCost = store.countTotalCost();
+                    System.out.println("Общая стоимость всех товаров на складе: " + totalCost);
+                    break;
+
+                case 6:
+                    System.out.print("Введите имя пользователя: ");
                 String username = input.nextLine();
                 System.out.print("Введите email пользователя : ");
                 String email = input.nextLine();
                 User user = new User(username, email);
-
                 ArrayList<Product> orderProducts1 = new ArrayList<>();
                 store.makeAnOrder(user, orderProducts1);
                 System.out.println("Заказ сформирован");
 //                   /...тотальное непонимание как дальше сделать processSale
 //                доделать
                 break;
-            }
-                case 7 ->
-                        System.out.println("Все заказы:");
-                store.showInfo();
-                break;
 
-            case 0 -> {
-                return;
+                case 7:
+                    System.out.println("Все заказы:");
+                    store.showInfo();
+                    break;
+
+                case 0:
+                    return;
+
+                default:
+                    System.out.println("Некорректный ввод");
             }
-            default -> System.out.println("Некорректный ввод");
         }
+
+
     }
 
     static void printMenu() {
+        System.out.println("Введите номер задачи для выполнения:");
+        System.out.println();
         System.out.println("1.Добавление товара в инвентарь");
         System.out.println("2.Удаление товара из инвентаря");
         System.out.println("3.Обновление количества товара в инвентаре");
@@ -92,8 +104,6 @@ public class Main {
         System.out.println("7.Вывод информации о всех заказах");
         System.out.println("0.Выйти из приложения");
     }
-}
 
 
-    }
 }

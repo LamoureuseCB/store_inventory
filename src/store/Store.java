@@ -14,11 +14,23 @@ public class Store {
     public void addProductToStore(Product product){
         products.add(product);
     }
-    public void removeProductFromStore(Product product){
-        products.remove(product);
+    public Product removeProduct(String productName) {
+        for (Product product : products) {
+            if (product.getName().equals(productName)) {
+                products.remove(product);
+                return product;
+            }
+        }
+        return null;
     }
-    public void updateAmountOfProducts(Product product,int updatedQuantity){
-        product.setQuantity(updatedQuantity);
+
+    public void updateAmountOfProducts(String productName,int updatedQuantity){
+        for (Product p:products) {
+            if(p.getName().equals(productName)){
+                p.setQuantity(updatedQuantity);
+                break;
+            }
+        }
     }
 
     public void showProductByCategory(String category){
@@ -30,7 +42,7 @@ public class Store {
         }
     }
     public double countTotalCost(){
-        double totalProductsCost = 0;
+        double totalProductsCost = 0.0;
         for (Product product:products){
           return totalProductsCost += product.getPricePerUnit() * product.getQuantity();
         }
@@ -40,15 +52,14 @@ public class Store {
         Order order = new Order(user);
         for (Product product:products) {
             order.addProduct(product);
-
         }
         orders.add(order);
 
     }
     public void processSale(Order order) {
         for (Product product:order.getProducts()) {
-            for (Product storageItem:products) {
-                if(storageItem.equals(product.getName())){
+            for (Product p:products) {
+                if(p.equals(product.getName())){
 //                   убрать товар из магазина и добавить его в заказ пользователя????
 
             }
